@@ -1,0 +1,58 @@
+.SidebarHeaderDropdownButton {
+    display: flex;
+    position: relative;
+    align-items: center;
+
+    .header__info {
+        @include flex-grow(1);
+        color: $white;
+        padding: 3px 15px 0 8px;
+        position: relative;
+        width: 100%;
+
+        .team__name {
+            font-size: 14px;
+            font-weight: 600;
+            overflow: hidden;
+            text-decoration: none;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .user__name {
+            font-weight: 400;
+        }
+    }
+
+    .unread-badge {
+        position: absolute;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+        right: 2px;
+        bottom: 2px;
+        background: #F74343;
+    }
+
+    .unread-badge-addon {
+        position: absolute;
+        top: 8px;
+        right: 4px;
+        height: 12px;
+        width: 12px;
+        border-radius: 32px;
+        background-color: var(--sidebar-header-bg);
+    }
+
+    .menu-icon {
+        @include opacity(.8);
+        fill: $white;
+    }
+
+    &:hover {
+        .user__name,
+        .menu-icon {
+            @include opacity(1);
+        }
+    }
+}

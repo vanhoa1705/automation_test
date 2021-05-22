@@ -1,0 +1,30 @@
+@charset 'UTF-8';
+
+.tooltip {
+    word-wrap: break-word;
+    max-width: 220px;
+    pointer-events: none;
+
+    .tooltip-inner {
+        max-width: 100%;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 5px 10px 6px;
+        word-break: break-word;
+        text-align: center;
+        line-height: 18px;
+        box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.12);
+
+    }
+
+    &.text-nowrap {
+        .tooltip-inner {
+            white-space: nowrap;
+        }
+    }
+
+
+    .tooltip-help {
+        color: rgba(255, 255, 255, 0.64);
+    }
+}

@@ -1,0 +1,1175 @@
+@charset "UTF-8";
+
+#TeamSidebar {
+    display: flex;
+    width: 65px;
+    background-color: var(--sidebar-header-bg);
+    position: fixed;
+    flex-direction: column;
+    left: 0;
+    text-align: center;
+    z-index: 13;
+    height: 100%;
+
+    .TeamSidebarWrapper {
+        -webkit-overflow-scrolling: touch;
+        background-color: rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        height: 100%;
+        flex: 1 1 auto;
+        position: relative;
+    }
+}
+
+#SidebarContainer {
+    background-color: var(--sidebar-bg);
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    z-index: 16;
+    border-right: 1px solid rgba(var(--center-channel-color-rgb), 0.12);
+
+    &.dragging {
+        z-index: 14;
+        & + div {
+            cursor: no-drop !important;
+        }
+
+        > :not(.SidebarNavContainer) {
+            cursor: no-drop !important;
+        }
+
+        .dropDisabled {
+            cursor: no-drop !important;
+
+            .SidebarChannelGroupHeader_groupButton, .SidebarLink {
+                opacity: 0.4;
+            }
+
+            .SidebarLink {
+                cursor: no-drop !important;
+
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+
+        .SidebarNavContainer:not(.disabled) .SidebarChannelGroup .SidebarChannelGroupHeader_groupButton:hover {
+            color: inherit;
+            cursor: inherit;
+        }
+    }
+
+    body.announcement-bar--fixed & {
+        height: calc(100% - #{$announcement-bar-height});
+    }
+
+    .a11y--focused {
+        box-shadow: inset 0 0 1px 3px rgba(var(--sidebar-text-rgb), 0.5), inset 0 0 0 1px var(--sidebar-text) !important;
+
+        .SidebarChannelGroupHeader_groupButton {
+            background-color: inherit !important;
+        }
+    }
+
+    .SidebarContainer_filterAddChannel {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+    .SidebarContainer_rightContainer {
+        display: flex;
+    }
+
+    .SidebarHeader {
+        background-color: var(--sidebar-header-bg);
+
+        .header__info {
+            color: var(--sidebar-header-text-color);
+
+            .user__name {
+                color: rgba(var(--sidebar-header-text-color-rgb), 0.8);
+            }
+
+            .team__name,
+            .user__name {
+                max-width: 140px;
+            }
+
+            &:hover .user__name {
+                color: var(--sidebar-header-text-color);
+            }
+        }
+
+        .status-wrapper {
+            height: 36px;
+            width: 36px;
+
+            .status {
+                bottom: -5px;
+                height: 19px;
+                right: -6px;
+                width: 19px;
+
+                .offline--icon {
+                    fill: var(--sidebar-text);
+                }
+
+                svg {
+                    height: 13px;
+                    left: 0;
+                    max-height: initial;
+                    position: relative;
+                    top: 0;
+                    width: 13px;
+                    z-index: 1;
+                }
+            }
+        }
+    }
+
+    .SidebarChannelNavigator {
+        &.desktop {
+            display: block;
+            margin: 16px 14px 8px 14px;
+
+            .AddChannelDropdown_dropdownButton,
+            .SidebarFilters_filterButton,
+            .SidebarChannelNavigator_backButton,
+            .SidebarChannelNavigator_forwardButton {
+                background: transparent;
+
+                &:hover:not(.active) {
+                    background: var(--sidebar-text-08);
+                    color: var(--sidebar-text);
+                }
+            }
+        }
+
+        &.webapp {
+            display: flex;
+            margin: 16px 14px 8px 14px;
+
+            .AddChannelDropdown_dropdownButton,
+            .SidebarChannelNavigator_jumpToButton,
+            .SidebarFilters_filterButton {
+                margin: 0 2px;
+                background: var(--sidebar-text-08);
+
+                &:hover:not(.active) {
+                    background: var(--sidebar-text-16);
+                    color: var(--sidebar-text);
+                }
+            }
+        }
+
+        .AddChannelDropdown_dropdownButton,
+        .SidebarChannelNavigator_jumpToButton,
+        .SidebarFilters_filterButtontton,
+        .SidebarChannelNavigator_backButton,
+        .SidebarChannelNavigator_forwardButton {
+            font-size: 18px;
+            height: 28px;
+            min-width: 28px;
+            vertical-align: middle;
+            border: 0;
+            color: rgba(var(--sidebar-text-rgb), 0.72);
+
+            &.disabled {
+                background: rgba(255, 255, 255, 0.08);
+            }
+        }
+
+        .SidebarChannelNavigator_jumpToButton {
+            background: var(--sidebar-text-08);
+            width: 100%;
+            text-align: left;
+            border-radius: 4px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            padding: 0 5px 0 2px;
+
+            .icon-magnify {
+                font-size: 18px;
+                margin-right: 2px;
+                display: inline-flex;
+            }
+
+            .SidebarChannelNavigator_shortcutText {
+                margin-left: auto;
+                padding-right: 3px;
+                display: none;
+            }
+
+            &:hover {
+                background: var(--sidebar-text-16);
+                color: var(--sidebar-text);
+                .SidebarChannelNavigator_shortcutText {
+                    display: inherit;
+                }
+            }
+        }
+        .SidebarChannelNavigator_divider {
+            border-right: 1px solid var(--sidebar-text-16);
+            height: 28px;
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+
+        .SidebarChannelNavigator_backButton {
+            border-radius: 4px;
+            padding: 0;
+            background: transparent;
+        }
+
+        .SidebarChannelNavigator_forwardButton {
+            border-radius: 4px;
+            padding: 0;
+            background: transparent;
+        }
+    }
+
+    .SidebarFilters {
+        align-items: center;
+    }
+    .SidebarFilters .SidebarFilters_filterButton {
+        display: block;
+        line-height: 26px;
+        height: 28px;
+        width: 28px;
+        text-align: center;
+        border-radius: 4px;
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .SidebarFilters .SidebarFilters_filterButton:hover {
+        color: rgba(var(--sidebar-text-rgb), 0.8);
+    }
+    .SidebarFilters .SidebarFilters_filterButton.active {
+        color: var(--sidebar-bg);
+        background: var(--sidebar-text);
+    }
+
+    .AddChannelDropdown {
+        height: 30px;
+
+        .dropdown-menu {
+            margin-top: 8px;
+            line-height: 19px;
+            min-width: 0;
+
+            span {
+                white-space: nowrap;
+                font-size: 14px;
+                color: rgba(var(--center-channel-color-rgb), 0.9);
+            }
+
+            button {
+                padding: 1px 16px;
+            }
+
+            i {
+                font-size: 16px;
+                color: rgba(var(--center-channel-color-rgb), 0.72);
+                line-height: 16px;
+            }
+        }
+    }
+
+    .AddChannelDropdown_dropdownButton {
+        padding: 0;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        color: rgba(var(--sidebar-text-rgb), 0.8);
+        font-size: 20px;
+        height: 28px;
+        width: 28px;
+        border-radius: 4px;
+    }
+    .AddChannelDropdown_dropdownButton:hover, .AddChannelDropdown_dropdownButton:active, .AddChannelDropdown_dropdownButton:focus {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--sidebar-text);
+    }
+    .AddChannelDropdown_dropdownButton:focus {
+        outline-style: none;
+    }
+
+    .SidebarMenu {
+        opacity: 1;
+
+        .dropdown-menu {
+            line-height: 20px;
+            min-width: 0;
+            padding: 8px 0;
+
+            span {
+                white-space: nowrap;
+            }
+
+            button {
+                padding: 1px 16px;
+            }
+
+            i {
+                font-size: 16px;
+                color: rgba(var(--center-channel-color-rgb), 0.72);
+                line-height: 16px;
+            }
+        }
+
+        .Menu {
+            position: fixed;
+
+            .MenuItem {
+                span.icon {
+                    padding-right: 12px;
+                }
+
+                i:before {
+                    margin: 0;
+                }
+            }
+
+            .SubMenu {
+                position: absolute;
+                margin-top: -8px;
+                margin-left: -1px;
+
+                .MenuItem {
+                    text-transform: capitalize;
+                }
+            }
+
+            #SidebarChannelMenu-moveToDivider {
+                pointer-events: none;
+                padding: 1px 0;
+
+                .MenuGroup.menu-divider {
+                    margin-right: -32px;
+                }
+
+                span {
+                    display: none;
+                }
+            }
+        }
+
+        .styleSelectableItem {
+            text-transform: capitalize;
+
+            .MenuItem {
+                width: 100%;
+
+                div:hover,
+                div:focus {
+                    background: none !important;
+                }
+            }
+
+            .SubMenu__icon-right {
+                margin-right: 0;
+                padding: 0 9px 0 8px;
+                &.mobile {
+                    padding: 0 4px 0 9px;
+                }
+            }
+
+            .styleSelectableItemDiv {
+                display: flex;
+                padding: 0 15px;
+                margin: 0;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .sorting-menu-checkbox {
+                padding-right: 30px;
+                width: 0;
+
+                i {
+                    color: var(--button-bg);
+                }
+            }
+
+            .SubMenuItemContainer:not(.hasDivider) {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .selected {
+                text-transform: none;
+                font-size: 12px;
+                color: rgba(var(--center-channel-color-rgb), 0.56);
+                width: 60%;
+                text-align: right;
+                margin-top: 1px;
+            }
+        }
+    }
+
+    .SidebarMenu_menuButton {
+        padding: 0;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        font-size: 16px;
+        line-height: 16px;
+        border-radius: 4px;
+    }
+
+    .SidebarMenu_menuButton {
+        &:hover,
+        &:active,
+        &:focus {
+            cursor: pointer;
+            color: var(--sidebar-text);
+        }
+    }
+
+    .SidebarMenu_menuButton:focus {
+        outline-style: none;
+    }
+
+    .SidebarNavContainer {
+        flex: 1 1 auto;
+        position: relative;
+
+        .scrollbar--view {
+            z-index: unset !important;
+        }
+
+        .scrollbar--view ~ div {
+            z-index: 2;
+
+            div {
+                z-index: 2;
+            }
+        }
+
+        .scrollbar--verticalTrack {
+            right: 2px;
+            bottom: 2px;
+            top: 2px;
+            border-radius: 3px;
+            pointer-events: none;
+        }
+
+        .scrollbar--vertical {
+            pointer-events: all;
+        }
+    }
+
+    .SidebarCategory_newLabel {
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 16px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.01em;
+        text-transform: uppercase;
+        color: var(--mention-color);
+        border-radius: 4px;
+        background: var(--mention-bg);
+        width: 32px;
+        height: 16px;
+        padding: 0 4px;
+        margin-left: 4px;
+        margin-right: 16px;
+    }
+
+    .SidebarCategory_newDropBox {
+        border: 1px dashed rgba(var(--sidebar-text-rgb), 0.3);
+        border-radius: 4px;
+        margin: 0 16px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+
+        > i {
+            font-size: 18px;
+            line-height: 16px;
+            color: rgba(var(--sidebar-text-rgb), 0.6);
+        }
+
+        .SidebarCategory_newDropBox-label {
+            font-size: 12px;
+            line-height: 16px;
+            color: rgba(var(--sidebar-text-rgb), 0.72);
+            margin-left: 8px;
+        }
+
+
+        &.animating {
+            transition-property: height, padding, color;
+            transition-duration: 0.15s; /* collapse animation speed */
+            transition-timing-function: ease-out;
+        }
+
+        &.collapsed {
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border-top: none;
+            border-bottom: none;
+            overflow-y: hidden;
+        }
+    }
+
+    .SidebarChannelGroup.a11y--active {
+        .SidebarCategory_newLabel {
+            opacity: 0;
+        }
+
+        .SidebarMenu {
+            display: block !important;
+
+            .SidebarMenu_menuButton {
+                opacity: 0;
+            }
+        }
+
+        .SidebarChannelGroupHeader_sortButton {
+            display: block !important;
+            opacity: 0;
+        }
+
+        .SidebarChannelGroupHeader_groupButton.a11y--focused {
+            & + .SidebarMenu .SidebarMenu_menuButton {
+                opacity: 1;
+            }
+
+            & + .SidebarChannelGroupHeader_sortButton {
+                opacity: 1;
+            }
+        }
+
+        .SidebarLink.a11y--focused .SidebarMenu .SidebarMenu_menuButton {
+            opacity: 1;
+        }
+
+        .SidebarMenu_menuButton.a11y--focused {
+            opacity: 1;
+        }
+
+        .SidebarChannelGroupHeader_sortButton.a11y--focused {
+            opacity: 1;
+        }
+
+        .SidebarMenu.menuOpen .SidebarMenu_menuButton {
+            opacity: 1;
+        }
+    }
+
+    .SidebarChannelGroup .SidebarChannelGroupHeader {
+        align-items: center;
+        height: 32px;
+        font-family: 'Open Sans', sans-serif;
+        text-transform: uppercase;
+        text-overflow: ellipsis;
+        text-align: left;
+        border: none;
+        background-color: var(--sidebar-bg);
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        top: 0;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.33);
+        transition: box-shadow 0.25s ease-in-out;
+        z-index: 1;
+        display: flex;
+
+        .SidebarMenu_menuButton {
+            height: 28px;
+            width: 28px;
+            margin: 2px 16px 2px 2px;
+
+            &:hover, &:focus {
+                background-color: rgba(255, 255, 255, 0.08);
+            }
+
+            &.additionalClass {
+                margin: 0;
+            }
+        }
+
+        .SidebarMenu:not(.menuOpen) {
+            display: none;
+        }
+
+        &.muted {
+            .icon-chevron-down, .SidebarChannelGroupHeader_text {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    .SidebarChannelGroup:not(.autoSortedCategory) .draggingOver .SidebarChannelGroupHeader:hover {
+        box-shadow: inset -1px 0 0 rgba(var(--sidebar-text-rgb), 0.60), inset 0 -1px 0 rgba(var(--sidebar-text-rgb), 0.6), inset 1px 0 0 rgba(var(--sidebar-text-rgb), 0.6), inset 0 1px 0 rgba(var(--sidebar-text-rgb), 0.6);
+        border-radius: 4px;
+
+        .SidebarChannelGroupHeader_groupButton {
+            background-color: inherit;
+        }
+    }
+
+    .SidebarChannelGroupHeader_groupButton {
+        height: 32px;
+        padding: 0;
+        font-size: 12px;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        text-transform: uppercase;
+        white-space: nowrap;
+        text-align: left;
+        border: none;
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        background-color: var(--sidebar-bg);
+        top: 0;
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.33);
+        transition: box-shadow 0.25s ease-in-out;
+        z-index: 1;
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        align-items: center;
+
+        .emoji {
+            color: var(--sidebar-text);
+        }
+
+        .SidebarChannelGroupHeader_text {
+            flex: 0 1 auto;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            padding-left: 16px;
+        }
+
+        &.dragging {
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+            color: var(--sidebar-text);
+        }
+
+        i.icon-chevron-down {
+            max-width: 16px;
+
+            &.hide-arrow {
+                visibility: hidden;
+            }
+
+            + .SidebarChannelGroupHeader_text {
+                padding-left: 0;
+            }
+        }
+    }
+
+    .SidebarChannelGroupHeader--static {
+        padding-left: 0;
+    }
+
+    button.SidebarChannelGroupHeader_groupButton > div {
+        // This overrides react-beautiful-dnd's grab cursor
+        cursor: pointer;
+    }
+
+    .SidebarChannelGroup.menuIsOpen ~ .SidebarChannelGroup .SidebarChannelGroupHeader_groupButton {
+        background-color: inherit !important;
+
+        .SidebarCategory_newLabel {
+            display: none;
+        }
+    }
+
+    .SidebarChannelGroup.menuIsOpen .SidebarCategory_newLabel {
+        display: none;
+    }
+
+    .SidebarNavContainer.disabled .SidebarChannelGroup .SidebarChannelGroupHeader_groupButton {
+        cursor: default;
+
+        i.icon-chevron-down {
+            visibility: hidden;
+        }
+    }
+
+    .SidebarChannelGroup .SidebarChannelGroupHeader.stuck {
+        /* box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.33);
+        transition: box-shadow 0.25s ease-in-out; */
+    }
+
+    .SidebarNavContainer:not(.disabled) .SidebarChannelGroup .SidebarChannelGroupHeader:hover {
+        .SidebarMenu {
+            display: block;
+        }
+
+        .SidebarCategory_newLabel {
+            display: none;
+        }
+
+        .SidebarChannelGroupHeader_sortButton {
+            display: block;
+        }
+    }
+
+    .SidebarNavContainer:not(.disabled) .SidebarChannelGroup:not(.dropDisabled) .SidebarChannelGroupHeader:not(.SidebarChannelGroupHeader--static) .SidebarChannelGroupHeader_groupButton:hover {
+        //cursor: pointer;
+
+        > div:not(.SidebarCategory_newLabel), > i {
+            color: var(--sidebar-text);
+        }
+    }
+
+    .SidebarChannelGroup .SidebarChannelGroupHeader_groupButton:focus {
+        /* box-shadow: inset 0 0 0 2px orange; */
+        outline-style: none;
+    }
+    .SidebarChannelGroup .SidebarChannelGroupHeader_groupButton.directMessages {
+        width: 208px;
+    }
+    .SidebarChannelGroup .SidebarChannelGroupHeader > i {
+        font-size: 12px;
+    }
+
+    .SidebarChannelGroup.autoSortedCategory .draggingOver {
+        box-shadow: inset -1px 0 0 rgba(var(--sidebar-text-rgb), 0.6), inset 0 -1px 0 rgba(var(--sidebar-text-rgb), 0.6), inset 1px 0 0 rgba(var(--sidebar-text-rgb), 0.6), inset 0 1px 0 rgba(var(--sidebar-text-rgb), 0.6);
+        border-radius: 4px;
+
+        .SidebarChannelGroupHeader {
+            background-color: var(--sidebar-bg);
+
+            .SidebarChannelGroupHeader_groupButton {
+                border-radius: 4px 4px 0 0;
+                box-shadow: inset -1px 0 0 rgba(var(--sidebar-text-rgb), 0.6), inset 1px 0 0 rgba(var(--sidebar-text-rgb), 0.6), inset 0 1px 0 rgba(var(--sidebar-text-rgb), 0.6);
+            }
+        }
+    }
+
+    // .SidebarChannelGroup.autoSortedCategory.isCollapsed .draggingOver {
+    //     .SidebarChannelGroupHeader {
+    //         background-color: transparent;
+    //     }
+    // }
+
+    .SidebarChannelGroup.capture .SidebarChannelGroup_content {
+        margin-bottom: 0;
+        padding-bottom: 14px;
+    }
+
+    .SidebarChannelGroupHeader_addButton {
+        padding: 0;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        color: rgba(var(--sidebar-text-rgb), 0.64);
+        font-size: 18px;
+        line-height: 16px;
+        height: 28px;
+        width: 28px;
+        min-width: 28px;
+        border-radius: 4px;
+        margin: 2px 16px 2px 2px;
+    }
+    .SidebarChannelGroupHeader_addButton:hover {
+        cursor: pointer;
+        color: var(--sidebar-text);
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+    .SidebarChannelGroupHeader_addButton:focus {
+        outline-style: none;
+    }
+
+    .SidebarChannelGroupHeader_sortButton {
+        padding: 0;
+        z-index: 1;
+        background: transparent;
+        border: none;
+        color: rgba(var(--sidebar-text-rgb), 0.64);
+        font-size: 16px;
+        line-height: 16px;
+        height: 28px;
+        width: 28px;
+        min-width: 28px;
+        border-radius: 4px;
+        margin: 2px 2px 2px auto;
+        display: none;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+        };
+    }
+    .SidebarChannelGroupHeader_sortButton:hover {
+        cursor: pointer;
+        color: var(--sidebar-text);
+    }
+    .SidebarChannelGroupHeader_sortButton:focus {
+        outline-style: none;
+    }
+
+    /* Content */
+    .SidebarChannelGroup_content {
+        margin-bottom: 14px;
+        min-height: 2px;
+    }
+
+    .SidebarChannelGroup.a11y--active .SidebarChannelGroup_content {
+        margin-bottom: 0;
+        padding-bottom: 14px;
+    }
+
+    .SidebarChannelGroup_content ul,
+    .NavGroupContent {
+        margin: 0;
+        padding: 0;
+    }
+
+    .SidebarChannelGroup .SidebarChannel.newChannelSpacer {
+        height: 0;
+    }
+
+    /* Channels */
+    .SidebarChannel {
+        display: flex;
+        height: 32px; /* height required for transition animation */
+        list-style-type: none;
+        /* border: solid 2px transparent; */
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        opacity: 1;
+        visibility: visible;
+        align-items: center;
+        overflow: hidden;
+
+        &:hover {
+            .btn-close {
+                @include opacity(.8);
+                visibility: visible;
+            }
+        }
+
+        &.dragging {
+            background-color: var(--sidebar-bg);
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+
+            /* MM-32401: Needed to ensure that the channel selected count is displayed correctly */
+            overflow: visible;
+
+            .SidebarLink {
+                background: rgba(255, 255, 255, 0.08);
+                border-radius: 4px;
+            }
+        }
+
+        &.fadeOnDrop {
+            opacity: 0;
+            transition: all cubic-bezier(.2,1,.1,1) 0.33s;
+        }
+
+        &.noFloat {
+            transform: none !important;
+        }
+
+        &.selectedDragging {
+            opacity: 0.25;
+            transition: all cubic-bezier(.2,1,.1,1) 0.33s;
+        }
+
+        .btn-close {
+            @include opacity(0);
+            visibility: hidden;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 21px;
+            font-weight: 600;
+            position: relative;
+            width: 24px;
+            height: 20px;
+            line-height: 16px;
+            margin-right: 16px;
+            text-align: center;
+
+            &:hover {
+                @include opacity(1);
+            }
+        }
+
+        .SidebarMenu_menuButton {
+            height: 28px;
+            width: 28px;
+        }
+
+        .SidebarChannel__selectedCount {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            height: 25px;
+            background: var(--center-channel-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12);
+            border-radius: 20px;
+            padding: 2px 9px 7px 9px;
+
+
+            > span {
+                font-weight: 600;
+                font-size: 12px;
+                line-height: 11px;
+                color: var(--center-channel-bg);
+            }
+        }
+
+        > span {
+            flex-grow: 1;
+        }
+    }
+
+    .SidebarChannel:hover {
+        /* background: rgba(255, 255, 255, 0.16); */
+    }
+
+
+    .SidebarChannel.animating {
+        transition-property: height, padding, color, opacity, visibility;
+        transition-duration: 0.15s, 0.15s, 0.15s, 0.15s, 0.15s; /* collapse animation speed */
+        transition-timing-function: ease, ease, ease, ease-in, step-start;
+
+        &.collapsed {
+            transition-timing-function: ease, ease, ease, ease-out, step-end;
+        }
+    }
+
+    .SidebarChannel.invisible {
+        opacity: 0;
+    }
+
+    .SidebarChannel.collapsed {
+        opacity: 0;
+        visibility: hidden;
+        height: 0 !important;
+        padding-top: 0;
+        padding-bottom: 0;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    /* fade out collapsing list item */
+    .SidebarChannel.animating .SidebarLink {
+        transition-property: color;
+        transition-duration: 0.15s; /* speed should match collapse animation speed */
+        transition-timing-function: ease-out;
+    }
+
+    .SidebarChannel .SidebarLink {
+        position: relative;
+        font-size: 14px;
+        text-decoration: none;
+        padding: 7px 16px 7px 14px;
+        display: flex;
+        color: rgba(var(--sidebar-text-rgb), 0.6);
+        align-items: center;
+        margin-right: 0;
+        width: 240px;
+        border-top: 0;
+        border-bottom: 0;
+        height: 32px;
+
+        .emoji {
+            color: var(--sidebar-text);
+        }
+
+        &.muted {
+            div.SidebarChannelLinkLabel_wrapper, > i, .status.status--group, .badge {
+                opacity: 0.4;
+            }
+        }
+
+        .SidebarMenu:not(.menuOpen) {
+            display: none;
+        }
+    }
+    .SidebarChannel .SidebarLink:focus {
+        /* box-shadow: inset 0 0 0 2px orange; */
+        outline-style: none;
+    }
+
+    .SidebarChannel .SidebarLink:hover,
+    .SidebarChannel .SidebarLink.menuOpen {
+        background-color: var(--sidebar-text-hover-bg);
+
+        padding-right: 5px;
+
+        .DirectChannel__status-icon {
+            box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.12)
+        }
+
+        .SidebarMenu_menuButton {
+            margin-right: 11px;
+        }
+
+        .SidebarMenu {
+            display: block;
+        }
+
+        .badge {
+            // Hide the badge by hiding it instead of using `display: none` since the desktop app only counts
+            // badges with a non-zero offsetHeight when counting notifications
+            position: absolute;
+            visibility: hidden;
+        }
+    }
+
+    .SidebarChannel.active .SidebarLink {
+        background: var(--sidebar-text-08);
+
+        .DirectChannel__profile-picture .DirectChannel__status-icon {
+            box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.24)
+        }
+
+        .SidebarChannelLinkLabel {
+            color: var(--sidebar-text);
+        }
+
+        &.selected {
+            background: rgba(var(--sidebar-text-active-border-rgb), 0.56);
+
+            &:hover {
+                background: rgba(var(--sidebar-text-active-border-rgb), 0.72);
+            }
+        }
+
+    }
+
+    .SidebarLink.selected {
+        background: rgba(var(--sidebar-text-active-border-rgb), 0.56);
+        color: rgba(var(--sidebar-text-rgb), 1);
+
+        &:hover {
+            background: rgba(var(--sidebar-text-active-border-rgb), 0.72);
+        }
+    }
+
+    .SidebarChannel.active .SidebarLink::before {
+        content: '';
+        height: 100%;
+        position: absolute;
+        left: -2px;
+        top: 0;
+        width: 4px;
+        background: var(--sidebar-text-active-border);
+        border-radius: 4px;
+    }
+
+    .SidebarChannel.unread .SidebarChannelLinkLabel,
+    .SidebarChannel.unread .SidebarLink:hover .SidebarChannelLinkLabel {
+        font-weight: 600;
+        color: var(--sidebar-unread-text);
+    }
+    .SidebarChannel .SidebarLink > i {
+        font-size: 18px;
+        margin: 0 6px 0 -2px;
+        display: flex;
+    }
+
+    .SidebarChannel {
+        & span.SidebarChannelLinkLabel {
+            max-width: 100%;
+            white-space: nowrap;
+            line-height: 18px;
+            text-align: justify;
+            height: 18px;
+
+            &.truncated {
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .SidebarChannelLinkLabel_wrapper,
+    .SidebarChannelLinkLabel_wrapper > div {
+        overflow: hidden;
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .DirectChannel__profile-picture {
+        height: 20px;
+        margin-right: 9px;
+
+        .DirectChannel__status-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            border-radius: 100%;
+            background: var(--sidebar-bg);
+            height: 13px;
+            width: 13px;
+            font-size: 12px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+    }
+
+    .icon {
+        display: inline-block;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: transform 0.15s ease-out; /* should match collapse animation speed */
+    }
+    .icon-rotate-minus-90 {
+        -webkit-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+        transition: transform 0.15s ease-out; /* should match collapse animation speed */
+    }
+
+    :root .icon-rotate-180 {
+        filter: none;
+    }
+
+    .status.status--group {
+        background: rgba(var(--sidebar-text-rgb), 0.16);
+        margin: 0px 9px 0 1px;
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .status-away {
+        color: var(--away-indicator);
+    }
+    .status-online {
+        color: var(--online-indicator);
+    }
+    .status-dnd {
+        color: var(--dnd-indicator);
+    }
+
+    + .inner-wrap #app-content {
+        margin-left: 240px;
+    }
+}
+
+.multi-teams {
+    #SidebarContainer {
+        left: 65px;
+
+        + .inner-wrap #app-content {
+            margin-left: 305px;
+        }
+    }
+}

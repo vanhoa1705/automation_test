@@ -1,0 +1,196 @@
+@import 'compass/css3';
+@import 'utils/module';
+
+.Menu {
+    .MenuItem {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+
+        &.MenuItem--with-icon {
+            .MenuItem__help-text {
+                padding-left: 28px;
+            }
+        }
+
+        .MenuItem__icon {
+            text-align: center;
+            width: 20px;
+            margin-right: 8px;
+        }
+
+        span.icon {
+            width: 28px; // less 12px padding is 16px
+            height: 16px; // less 3px top padding is 16px;
+            padding-right: 12px;
+            line-height: 16px;
+            display: inline-block;
+            align-self: center;
+        }
+
+        span.MenuItem__primary-text {
+            display: inline-flex;
+            white-space: normal;
+            line-height: 22px;
+            padding: 5px 0;
+        }
+
+        span.MenuItem__help-text {
+            @include opacity(.7);
+            display: block;
+            font-size: 12px;
+            line-height: 16px;
+            white-space: normal;
+            padding-bottom: 8px;
+
+            @media (max-width: 768px) {
+                margin: 0 0px 4px 38px;
+            }
+        }
+
+        > a {
+            text-decoration: none;
+
+            &:focus,
+            &:hover {
+                color: inherit;
+            }
+        }
+
+        > div {
+            &:hover,
+            &:focus {
+                background-color: var(--center-channel-color-08) !important;
+            }
+        }
+
+        > div,
+        > button,
+        > a {
+            align-items: center;
+            clear: both;
+            color: inherit;
+            cursor: pointer;
+            display: block;
+            font-weight: normal;
+            padding: 1px 16px;
+            text-align: left;
+            white-space: nowrap;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 28px;
+
+            &.MenuItem__with-help {
+                height: auto;
+
+                .MenuItem__primary-text {
+                    padding: 7px 0 3px;
+                }
+
+                .icon {
+                    @media (max-width: 768px) {
+                        top: 10px;
+                        position: relative;
+                    }
+                }
+            }
+
+            .MenuItem__icon {
+                width: 20px;
+                height: 20px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 8px;
+                top: 4px;
+                position: relative;
+            }
+
+            &:hover {
+                background: alpha-color($black, .08);
+            }
+
+            &.MenuItem__dangerous {
+                color: var(--dnd-indicator);
+
+                i {
+                    color: var(--dnd-indicator) !important;
+                }
+
+                &:hover {
+                    background-color: var(--dnd-indicator) !important;
+                    color: var(--sidebar-text);
+
+                    i {
+                        color: var(--sidebar-text) !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .MenuTopNotification {
+        padding: 8px;
+        margin: 8px;
+        margin-top: 0;
+        border-radius: 4px;
+        background-color: rgba(var(--button-bg-rgb), 0.04);
+
+        .upgradeLink {
+            color: --button-bg;
+            font-style: normal;
+            font-weight: 600;
+
+            &:hover {
+                color: --button-bg;
+                font-style: normal;
+                font-weight: 600;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.SubMenu {
+    padding-left: 0px;
+    position: absolute;
+    top: unset;
+    left: unset;
+}
+
+.SubMenu__icon-left {
+    color: rgba(var(--center-channel-color-rgb), 0.56);
+    font-size: 19px;
+    position: relative;
+    top: 0;
+}
+
+.SubMenu__icon-left-empty {
+    display: none;
+    font-size: 19px;
+    position: relative;
+    top: 0;
+    width: 0;
+}
+
+.SubMenu__icon-right {
+    color: rgba(var(--center-channel-color-rgb), 0.56);
+    font-size: 19px;
+    padding-top: 3px;
+    float: right;
+}
+
+.SubMenu__icon-right-empty {
+    display: none;
+    font-size: 19px;
+    padding: 0;
+    margin-left: auto;
+    width: 0;
+    top: 0;
+}
+
+.MenuItem__divider {
+    margin: 8px 0;
+    border-top: $border-gray;
+}

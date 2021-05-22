@@ -1,0 +1,63 @@
+@charset 'UTF-8';
+$positions: 't b l r';
+
+$positions: 't'top,
+'b'bottom,
+'l'left,
+'r'right;
+
+@for $i from 0 through 20 {
+
+    @each $label,
+    $position in $positions {
+        .p#{$label}-#{$i} {
+            padding-#{$position}: #{$i*4}px !important;
+        }
+    }
+
+    @each $label,
+    $position in $positions {
+        .m#{$label}-#{$i} {
+            margin-#{$position}: #{$i*4}px !important;
+        }
+    }
+
+    .m-#{$i} {
+        margin: #{$i*4}px !important;
+    }
+
+    .p-#{$i} {
+        padding: #{$i*4}px !important;
+    }
+}
+
+.d-block {
+    display: block;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.a11y--focused {
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px 2px $primary-color;
+}
+
+.pos-relative {
+    position: relative;
+}
+
+.hidden-label {
+    position: absolute;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+.overflow--visible {
+    overflow: visible;
+}
